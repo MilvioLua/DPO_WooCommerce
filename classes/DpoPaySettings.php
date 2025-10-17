@@ -10,6 +10,7 @@
  */
 class DpoPaySettings {
 
+
 	/**
 	 * Payment icons array.
 	 *

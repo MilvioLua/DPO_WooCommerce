@@ -17,6 +17,7 @@ require_once "$f/classes/DpoPayServices.php";
  */
 class WCGatewayDpoCron extends WCGatewayDPO {
 
+
 	public const LOGGING            = 'logging';
 	public const TXN_MSG            = 'The transaction paid successfully and waiting for approval. Notice that the stock will NOT reduced automaticlly. ';
 	public const ORDER_APPROVED     = 'The transaction paid successfully and order approved.';
