@@ -44,6 +44,10 @@ Need help to configure this plugin? Feel free to connect with our DPO Pay Suppor
 
 == Changelog ==
 
+= 1.3.1 2025-10-17 =
+ * Updated the Common Library to resolve the defaulted test service description issue.
+ * Verified compatibility with WooCommerce 10.2.2 and WordPress 6.8.3.
+
 = 1.3.0 2025-07-27 =
  * Added plugin support for the markup API to accurately represent fees on WooCommerce orders.
  * Resolved an issue with the cron debugging tool causing cancelled orders to not update.

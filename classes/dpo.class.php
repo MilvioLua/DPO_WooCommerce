@@ -32,7 +32,8 @@ require_once "$f/classes/DpoPaySettings.php";
 class WCGatewayDPO extends WC_Payment_Gateway {
 
 
-	public const VERSION_DPO = '1.3.0';
+
+	public const VERSION_DPO = '1.3.1';
 
 	protected const LOGGING = 'logging';
 
@@ -168,7 +169,8 @@ class WCGatewayDPO extends WC_Payment_Gateway {
 	 *
 	 * @return void
 	 */
-	#[NoReturn] public static function check_dpo_notify(): void {
+	#[NoReturn]
+	public static function check_dpo_notify(): void {
 		global $wpdb;
 
 		$pushData = file_get_contents( 'php://input' );
@@ -401,9 +403,9 @@ class WCGatewayDPO extends WC_Payment_Gateway {
 	public function admin_options(): void {
 		?>
 		<h2>
-		<?php
+			<?php
 			esc_html_e( self::DPO_GROUP, 'dpo-group-for-woocommerce' );
-		?>
+			?>
 		</h2>
 		<table class="form-table">
 			<caption>DPO Pay</caption>
@@ -495,10 +497,17 @@ class WCGatewayDPO extends WC_Payment_Gateway {
 			$single_product = wc_get_product( $product_id );
 
 			$serviceType = ! empty( $product_data['service_type'][0] )
-				? $product_data['service_type'][0]
-				: $this->get_option( 'default_service_type' );
+					? $product_data['service_type'][0]
+					: $this->get_option( 'default_service_type' );
 
-			$serviceDesc = str_replace( '&', 'and', $single_product->post->post_title );
+			// null check for product
+			if ( $single_product ) {
+				$serviceDesc = str_replace( '&', 'and', $single_product->get_name() );
+			} else {
+				// Fallback for non-existent products
+				$serviceDesc = 'General Service ';
+				self::doLogging( 'Product not found for ID: ' . $product_id );
+			}
 
 			// Replace html with underscores as it is not allowed in XML
 			$serviceDesc = str_replace( array( '<', '>', '/' ), '_', $serviceDesc );
@@ -864,11 +873,11 @@ ICON;
 
 			if ( $dpoLogo === 'yes' || $dpoLogo === 'on' ) {
 				$icon .= '<div style="margin-top: 0; width:100%"><div>' . $this->get_description() . '</div>' .
-					'<div>' .
-					'<img src="' . esc_url( WC_HTTPS::force_https_url( $this->icon ) ) . '" alt="' . esc_attr(
-						$this->get_title()
-					) .
-					'" style="width: 95px !important; height: 50px !important; border: none !important;"></div></div>';
+						'<div>' .
+						'<img src="' . esc_url( WC_HTTPS::force_https_url( $this->icon ) ) . '" alt="' . esc_attr(
+							$this->get_title()
+						) .
+						'" style="width: 95px !important; height: 50px !important; border: none !important;"></div></div>';
 			}
 
 			$icon       .= '<div style="display: inline-block;" id="dpo-icon-container">';

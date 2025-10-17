@@ -5,10 +5,10 @@
  * Description: Receive payments using the African DPO Pay payments provider.
  * Author: DPO Group
  * Author URI: https://www.dpogroup.com/
- * Version: 1.3.0
+ * Version: 1.3.1
  * Requires at least: 6.2
- * Tested up to: 6.8.1
- * WC tested up to: 9.8.5
+ * Tested up to: 6.8.3
+ * WC tested up to: 10.2.2
  * WC requires at least: 6.0
  * Requires PHP: 8.0
  *
@@ -138,11 +138,11 @@ function gdpo_custom_tab_options_tab(): void {
 	global $woothemes;
 	?>
 	<ul>
-		<li class="custom_tab"><a href="#dpo_service_tab_data"> 
-		<?php
+		<li class="custom_tab"><a href="#dpo_service_tab_data">
+				<?php
 				esc_html_e( 'DPO Service Type', $woothemes );
-		?>
-		</a></li>
+				?>
+			</a></li>
 	</ul>
 	<?php
 }
@@ -170,9 +170,9 @@ function gdpo_custom_tab_options(): void {
 		<div class="options_group custom_tab_options">
 			<p class="form-field">
 				<label>
-				<?php
+					<?php
 					esc_html_e( 'Service Type:', $woothemes );
-				?>
+					?>
 				</label>
 				<input type="text" name="service_type" value="
 				<?php
@@ -202,15 +202,18 @@ add_action( 'woocommerce_product_data_panels', 'gdpo_custom_tab_options' );
  */
 function gdpo_process_product_meta_custom_tab( $post_id ): void {
 	if (
-		! isset( $_POST['dpo_service_type_nonce'] ) ||
-		! wp_verify_nonce( $_POST['dpo_service_type_nonce'], 'dpo_save_service_type' ) ||
-		! isset( $_POST['service_type'] )
+			! isset( $_POST['dpo_service_type_nonce'] ) ||
+			! wp_verify_nonce( $_POST['dpo_service_type_nonce'], 'dpo_save_service_type' ) ||
+			! isset( $_POST['service_type'] )
 	) {
 		add_action(
 			'admin_notices',
 			function () {
 				echo '<div class="notice notice-error is-dismissible">';
-				echo '<p>' . esc_html__( 'Invalid form submission. Please try again.', 'dpo-group-for-woocommerce' ) . '</p>';
+				echo '<p>' . esc_html__(
+					'Invalid form submission. Please try again.',
+					'dpo-group-for-woocommerce'
+				) . '</p>';
 				echo '</div>';
 			}
 		);
@@ -229,6 +232,7 @@ add_action( 'woocommerce_process_product_meta', 'gdpo_process_product_meta_custo
  * Registers WooCommerce Blocks integration.
  */
 class WC_Dpo_Payments {
+
 
 	/**
 	 * Plugin bootstrapping.

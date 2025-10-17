@@ -1,5 +1,15 @@
 # Changelog
 
+## [[v1.3.1]](https://github.com/DPO-Group/DPO_WooCommerce/releases/tag/v1.3.1)
+
+### Fixed
+
+- Updated the Common Library to resolve the defaulted test service description issue.
+
+### Changed
+
+- Verified compatibility with WooCommerce 10.2.2 and WordPress 6.8.3.
+
 ## [[v1.3.0]](https://github.com/DPO-Group/DPO_WooCommerce/releases/tag/v1.3.0)
 
 ### Added

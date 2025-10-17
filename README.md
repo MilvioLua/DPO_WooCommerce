@@ -1,6 +1,6 @@
 # DPO_WooCommerce
 
-## DPO Pay WooCommerce plugin v1.3.0 for WooCommerce v9.8.5
+## DPO Pay WooCommerce plugin v1.3.1 for WooCommerce v10.2.2
 
 This is the DPO Pay plugin for WooCommerce. Please feel free to contact
 the [DPO Pay support team](https://dpogroup.com/contact-us/) should you require any assistance.

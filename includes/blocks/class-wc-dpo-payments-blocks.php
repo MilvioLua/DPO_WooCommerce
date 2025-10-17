@@ -9,6 +9,7 @@ use Automattic\WooCommerce\Blocks\Payments\Integrations\AbstractPaymentMethodTyp
  */
 final class WC_Gateway_Dpo_Blocks_Support extends AbstractPaymentMethodType {
 
+
 	/**
 	 * Payment method name/id/slug.
 	 *
